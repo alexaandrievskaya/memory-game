@@ -52,7 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ]
 
+    cardArray.sort(() => 0.5 - Math.random())
+
     const grid = document.querySelector('grid')
+    const resultDisplay = document.querySelector('#result')
+    let cardsChosen = []
+    let cardsChosenId = []
+    let cardsWon = []
 
     //create your board
     function createBoard() {
@@ -95,5 +101,18 @@ document.addEventListener('DOMContentLoaded', () => {
             resultDisplay.textContent = 'Congratulations! You found them all!'
         }
     }
+
+    //flip your card
+    function flipCard() {
+        let cardId = this.getAttribute('data-id')
+        cardsChosen.push(cardArray[cardId].name)
+        cardsChosenId.push(cardId)
+        this.setAttribute('src', cardArray[cardId].img)
+        if (cardsChosen.length ===2) {
+            setTimeout(checkForMatch, 500)
+        }
+    }
+
+    createBoard()
 
 })
